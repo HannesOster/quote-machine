@@ -31,12 +31,26 @@ const App = () => {
 
   const getNewQuote = () => {
     fetchRandomQuote();
+
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
     document.body.style.backgroundColor = `var(--bs-${randomColor})`;
+    document.getElementById("text").style.color = `var(--bs-${randomColor})`;
+    document.getElementById("author").style.color = `var(--bs-${randomColor})`;
+    document.getElementById(
+      "new-quote"
+    ).style.backgroundColor = `var(--bs-${randomColor})`;
+    document.getElementById(
+      "tweet-quote"
+    ).style.backgroundColor = `var(--bs-${randomColor})`;
   };
 
   return (
-    <main id="quote-box" className="container text-center mt-5">
+    <main
+      id="quote-box"
+      className="container text-center mt-5"
+      style={{ backgroundColor: "white" }}
+    >
       <section className="card p-4">
         <div id="text" className="mb-4">
           <p className="lead">{quote.text}</p>
