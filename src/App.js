@@ -3,10 +3,25 @@ import { FaTumblr, FaTwitter, FaHeart, FaTrash } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
+const useLocalStorageState = (key, defaultValue) => {
+  const [state, setState] = useState(
+    JSON.parse(localStorage.getItem(key)) || defaultValue
+  );
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(state));
+  }, [key, state]);
+
+  return [state, setState];
+};
+
 const App = () => {
   const [quote, setQuote] = useState({ text: "", author: "" });
-  const [savedQuotes, setSavedQuotes] = useState([]);
-  const [activeColor, setActiveColor] = useState("primary");
+  const [activeColor, setActiveColor] = useLocalStorageState(
+    "activeColor",
+    "primary"
+  );
+  const [savedQuotes, setSavedQuotes] = useLocalStorageState("savedQuotes", []);
 
   const colors = [
     "primary",
