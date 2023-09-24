@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { FaTumblr, FaTwitter, FaSave } from "react-icons/fa";
+import { FaTumblr, FaTwitter, FaHeart } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
   const [quote, setQuote] = useState({ text: "", author: "" });
   const [savedQuotes, setSavedQuotes] = useState([]);
+  const [activeColor, setActiveColor] = useState("primary");
 
   const colors = [
     "primary",
@@ -55,6 +56,10 @@ const App = () => {
     document.getElementById(
       "tumblr-quote"
     ).style.backgroundColor = `var(--bs-${randomColor})`;
+    document.getElementById(
+      "save-quote"
+    ).style.backgroundColor = `var(--bs-${randomColor})`;
+    setActiveColor(randomColor);
   };
 
   const saveQuote = () => {
@@ -91,6 +96,14 @@ const App = () => {
           >
             New Quote
           </button>
+          <button
+            id="save-quote"
+            className="btn btn-danger mt-3"
+            onClick={saveQuote}
+            style={{ color: "white", border: "white solid 1px" }}
+          >
+            <FaHeart />
+          </button>
           <a
             id="tweet-quote"
             href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
@@ -102,26 +115,46 @@ const App = () => {
             style={{ color: "white", border: "white solid 1px" }}
           >
             <FaTwitter />
-          </a>
-          <button
-            id="save-quote"
-            className="btn btn-warning mt-3"
-            onClick={saveQuote}
-            style={{ color: "white", border: "white solid 1px" }}
-          >
-            <FaSave />
-          </button>
+          </a>{" "}
         </div>
       </section>
       {savedQuotes.length > 0 && (
-        <section className="card p-4 mt-3" style={{ backgroundColor: "white" }}>
-          <h4 style={{ color: "var(--bs-info)" }}>Saved Quotes</h4>
-          {savedQuotes.map((savedQuote, index) => (
-            <div key={index} className="mb-2">
-              <p>"{savedQuote.text}"</p>
-              <p className="font-italic">- {savedQuote.author}</p>
+        <section className="card p-4 mt-5" style={{ backgroundColor: "white" }}>
+          <div className="accordion" id="savedQuotesAccordion">
+            <div className="accordion-item">
+              <h2 className="accordion-header" id="headingOne">
+                <button
+                  className="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                  style={{
+                    backgroundColor: `var(--bs-${activeColor})`,
+                    color: "white",
+                  }}
+                >
+                  Show Saved Quotes
+                </button>
+              </h2>
+              <div
+                id="collapseOne"
+                className="accordion-collapse collapse show"
+                aria-labelledby="headingOne"
+                data-bs-parent="#savedQuotesAccordion"
+              >
+                <div className="accordion-body">
+                  {savedQuotes.map((savedQuote, index) => (
+                    <div key={index}>
+                      <p>{savedQuote.text}</p>
+                      <p className="font-italic">- {savedQuote.author}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          ))}
+          </div>
         </section>
       )}
     </main>
