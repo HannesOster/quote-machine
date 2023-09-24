@@ -43,7 +43,7 @@ const App = () => {
     <main id="quote-box" className="container text-center mt-5">
       <section className="card p-4 " style={{ backgroundColor: "white" }}>
         <div id="text" className="mb-4">
-          <p className="lead">{quote.text}</p>
+          <p className="lead">"{quote.text}"</p>
         </div>
         <div id="author">
           <p className="font-italic">- {quote.author}</p>
