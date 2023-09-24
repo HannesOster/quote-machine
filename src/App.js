@@ -45,6 +45,7 @@ const App = () => {
     try {
       const response = await fetch("https://api.quotable.io/random");
       const data = await response.json();
+      console.log(data);
       setQuote({ text: data.content, author: data.author });
       const randomColor = colors[Math.floor(Math.random() * colors.length)];
       setActiveColor(randomColor);
@@ -96,63 +97,71 @@ const App = () => {
             - {quote.author}
           </h5>
         </div>
-        <div className="btn-group btn-group-justified" id="group">
-          <a
-            id="tumblr-quote"
-            href={`https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption=${encodeURIComponent(
-              `${quote.author}: ${quote.text}`
-            )}`}
-            className="btn btn-success mt-3  t-button"
-            target="_blank"
-            rel="noreferrer"
-            style={{
-              color: "white",
-              border: "white solid 1px",
-              backgroundColor: `var(--bs-${activeColor})`,
-            }}
-          >
-            <FaTumblr />
-          </a>{" "}
-          <button
-            id="new-quote"
-            className="btn btn-primary mt-3 mr-2  t-button"
-            onClick={getNewQuote}
-            style={{
-              color: "white",
-              border: "white solid 1px",
-              backgroundColor: `var(--bs-${activeColor})`,
-            }}
-          >
-            New Quote
-          </button>
-          <a
-            id="tweet-quote"
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-              `${quote.text} - ${quote.author}`
-            )}`}
-            target="_blank"
-            className="btn btn-info mt-3  t-button"
-            rel="noreferrer"
-            style={{
-              color: "white",
-              border: "white solid 1px",
-              backgroundColor: `var(--bs-${activeColor})`,
-            }}
-          >
-            <FaTwitter />
-          </a>
-          <button
-            id="save-quote"
-            className="btn btn-warning mt-3  t-button"
-            onClick={saveQuote}
-            style={{
-              color: "white",
-              border: "white solid 1px",
-              backgroundColor: `var(--bs-${activeColor})`,
-            }}
-          >
-            <FaHeart />
-          </button>
+        <div className="row">
+          <div className="col-md-3">
+            <a
+              id="tumblr-quote"
+              href={`https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption=${encodeURIComponent(
+                `${quote.author}: ${quote.text}`
+              )}`}
+              className="btn btn-success mt-3 t-button btn-block"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                color: "white",
+                border: "white solid 1px",
+                backgroundColor: `var(--bs-${activeColor})`,
+              }}
+            >
+              <FaTumblr />
+            </a>
+          </div>
+          <div className="col-md-3">
+            <a
+              id="tweet-quote"
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                `${quote.text} - ${quote.author}`
+              )}`}
+              target="_blank"
+              className="btn btn-info mt-3 t-button btn-block"
+              rel="noreferrer"
+              style={{
+                color: "white",
+                border: "white solid 1px",
+                backgroundColor: `var(--bs-${activeColor})`,
+              }}
+            >
+              <FaTwitter />
+            </a>
+          </div>
+          <div className="col-md-3">
+            <button
+              id="save-quote"
+              className="btn btn-info mt-3 t-button btn-block"
+              onClick={saveQuote}
+              style={{
+                color: "white",
+                border: "white solid 1px",
+                backgroundColor: `var(--bs-${activeColor})`,
+              }}
+            >
+              <FaHeart />
+            </button>{" "}
+          </div>
+          <div className="col-md-3">
+            <button
+              id="new-quote"
+              className="btn btn-primary mt-3 t-button btn-block"
+              onClick={getNewQuote}
+              style={{
+                color: "white",
+                border: "white solid 1px",
+                backgroundColor: `var(--bs-${activeColor})`,
+              }}
+            >
+              New Quote
+            </button>
+          </div>
         </div>
       </section>
       {savedQuotes.length > 0 && (
