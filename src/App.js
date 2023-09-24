@@ -4,16 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const App = () => {
   const [quote, setQuote] = useState({ text: "", author: "" });
 
-  const colors = [
-    "primary",
-    "success",
-    "info",
-    "warning",
-    "danger",
-    "secondary",
-    "dark",
-    "light",
-  ];
+  const colors = ["primary", "dark", "info", "secondary"];
 
   const fetchRandomQuote = async () => {
     try {
@@ -43,6 +34,9 @@ const App = () => {
     document.getElementById(
       "tweet-quote"
     ).style.backgroundColor = `var(--bs-${randomColor})`;
+    document.getElementById(
+      "tumblr-quote"
+    ).style.backgroundColor = `var(--bs-${randomColor})`;
   };
 
   return (
@@ -51,31 +45,47 @@ const App = () => {
       className="container text-center mt-5"
       style={{ backgroundColor: "white" }}
     >
-      <section className="card p-4">
+      <section className="card p-4 ">
         <div id="text" className="mb-4">
           <p className="lead">{quote.text}</p>
         </div>
         <div id="author">
           <p className="font-italic">- {quote.author}</p>
         </div>
-        <button
-          id="new-quote"
-          className="btn btn-primary mt-3 mr-2"
-          onClick={getNewQuote}
-        >
-          New Quote
-        </button>
-        <a
-          id="tweet-quote"
-          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-            `${quote.text} - ${quote.author}`
-          )}`}
-          target="_blank"
-          className="btn btn-info mt-3"
-          rel="noreferrer"
-        >
-          Tweet Quote
-        </a>
+        <div className="btn-group btn-group-justified" id="group">
+          <a
+            id="tumblr-quote"
+            href={`https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption=${encodeURIComponent(
+              `${quote.author}: ${quote.text}`
+            )}`}
+            className="btn btn-success mt-3"
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "white" }}
+          >
+            Post to Tumblr
+          </a>{" "}
+          <button
+            id="new-quote"
+            className="btn btn-primary mt-3 mr-2"
+            onClick={getNewQuote}
+            style={{ color: "white" }}
+          >
+            New Quote
+          </button>
+          <a
+            id="tweet-quote"
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+              `${quote.text} - ${quote.author}`
+            )}`}
+            target="_blank"
+            className="btn btn-info mt-3"
+            rel="noreferrer"
+            style={{ color: "white" }}
+          >
+            Tweet Quote
+          </a>
+        </div>
       </section>
     </main>
   );
