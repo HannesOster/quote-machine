@@ -40,12 +40,8 @@ const App = () => {
   };
 
   return (
-    <main
-      id="quote-box"
-      className="container text-center mt-5"
-      style={{ backgroundColor: "white" }}
-    >
-      <section className="card p-4 ">
+    <main id="quote-box" className="container text-center mt-5">
+      <section className="card p-4 " style={{ backgroundColor: "white" }}>
         <div id="text" className="mb-4">
           <p className="lead">{quote.text}</p>
         </div>
@@ -69,7 +65,7 @@ const App = () => {
             id="new-quote"
             className="btn btn-primary mt-3 mr-2"
             onClick={getNewQuote}
-            style={{ color: "white" }}
+            style={{ color: "white", border: "white solid 1px" }}
           >
             New Quote
           </button>
