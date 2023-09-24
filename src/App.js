@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { FaTumblr, FaTwitter } from "react-icons/fa";
+import { FaTumblr, FaTwitter, FaSave } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
   const [quote, setQuote] = useState({ text: "", author: "" });
+  const [savedQuotes, setSavedQuotes] = useState([]);
 
   const colors = [
     "primary",
@@ -56,6 +57,10 @@ const App = () => {
     ).style.backgroundColor = `var(--bs-${randomColor})`;
   };
 
+  const saveQuote = () => {
+    setSavedQuotes([...savedQuotes, quote]);
+  };
+
   return (
     <main id="quote-box" className="container text-center mt-5">
       <section className="card p-4 " style={{ backgroundColor: "white" }}>
@@ -98,8 +103,27 @@ const App = () => {
           >
             <FaTwitter />
           </a>
+          <button
+            id="save-quote"
+            className="btn btn-warning mt-3"
+            onClick={saveQuote}
+            style={{ color: "white", border: "white solid 1px" }}
+          >
+            <FaSave />
+          </button>
         </div>
       </section>
+      {savedQuotes.length > 0 && (
+        <section className="card p-4 mt-3" style={{ backgroundColor: "white" }}>
+          <h4 style={{ color: "var(--bs-info)" }}>Saved Quotes</h4>
+          {savedQuotes.map((savedQuote, index) => (
+            <div key={index} className="mb-2">
+              <p>"{savedQuote.text}"</p>
+              <p className="font-italic">- {savedQuote.author}</p>
+            </div>
+          ))}
+        </section>
+      )}
     </main>
   );
 };
