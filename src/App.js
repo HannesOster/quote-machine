@@ -1,25 +1,70 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
+const App = () => {
+  const [quote, setQuote] = useState({ text: "", author: "" });
+
+  const colors = [
+    "primary",
+    "success",
+    "info",
+    "warning",
+    "danger",
+    "secondary",
+    "dark",
+    "light",
+  ];
+
+  const fetchRandomQuote = async () => {
+    try {
+      const response = await fetch("https://api.quotable.io/random");
+      const data = await response.json();
+      setQuote({ text: data.content, author: data.author });
+    } catch (error) {
+      console.error("Error fetching quote:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRandomQuote();
+  }, []);
+
+  const getNewQuote = () => {
+    fetchRandomQuote();
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    document.body.style.backgroundColor = `var(--bs-${randomColor})`;
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <main id="quote-box" className="container text-center mt-5">
+      <section className="card p-4">
+        <div id="text" className="mb-4">
+          <p className="lead">{quote.text}</p>
+        </div>
+        <div id="author">
+          <p className="font-italic">- {quote.author}</p>
+        </div>
+        <button
+          id="new-quote"
+          className="btn btn-primary mt-3 mr-2"
+          onClick={getNewQuote}
         >
-          Learn React
+          New Quote
+        </button>
+        <a
+          id="tweet-quote"
+          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+            `${quote.text} - ${quote.author}`
+          )}`}
+          target="_blank"
+          className="btn btn-info mt-3"
+          rel="noreferrer"
+        >
+          Tweet Quote
         </a>
-      </header>
-    </div>
+      </section>
+    </main>
   );
-}
+};
 
 export default App;
