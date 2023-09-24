@@ -7,15 +7,20 @@ const App = () => {
 
   const colors = [
     "primary",
-    "dark",
-    "info",
     "secondary",
     "success",
     "danger",
     "warning",
+    "info",
+    "dark",
+    "indigo",
     "purple",
     "pink",
     "teal",
+    "blue",
+    "orange",
+    "gray",
+    "cyan",
   ];
 
   const fetchRandomQuote = async () => {
@@ -55,10 +60,10 @@ const App = () => {
     <main id="quote-box" className="container text-center mt-5">
       <section className="card p-4 " style={{ backgroundColor: "white" }}>
         <div id="text" className="mb-4">
-          <p className="lead">"{quote.text}"</p>
+          <h3 className="lead">"{quote.text}"</h3>
         </div>
         <div id="author">
-          <p className="font-italic">- {quote.author}</p>
+          <h5 className="font-italic">- {quote.author}</h5>
         </div>
         <div className="btn-group btn-group-justified" id="group">
           <a
@@ -69,7 +74,7 @@ const App = () => {
             className="btn btn-success mt-3"
             target="_blank"
             rel="noreferrer"
-            style={{ color: "white" }}
+            style={{ color: "white", border: "white solid 1px" }}
           >
             <FaTumblr />
           </a>{" "}
@@ -89,7 +94,7 @@ const App = () => {
             target="_blank"
             className="btn btn-info mt-3"
             rel="noreferrer"
-            style={{ color: "white" }}
+            style={{ color: "white", border: "white solid 1px" }}
           >
             <FaTwitter />
           </a>
