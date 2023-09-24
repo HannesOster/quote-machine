@@ -76,9 +76,9 @@ const App = () => {
   return (
     <main id="quote-box" className="container text-center mt-5">
       <section className="quote-card card p-4">
-        <div id="text" className="mb-4 quote-text">
+        <div id="text" className="mb-4">
           <h3
-            className="lead"
+            className="lead quote-text"
             style={{
               color: `var(--bs-${activeColor})`,
             }}
@@ -188,11 +188,13 @@ const App = () => {
                       key={index}
                     >
                       <div>
-                        <p>{savedQuote.text}</p>
-                        <p className="font-italic">- {savedQuote.author}</p>
+                        <p className="mr-3">{savedQuote.text}</p>
+                        <p className="font-italic mr-3">
+                          - {savedQuote.author}
+                        </p>
                       </div>
                       <button
-                        className="btn btn-danger"
+                        className="btn btn-danger ml-3"
                         onClick={() => removeSavedQuote(index)}
                       >
                         <FaTrash />
@@ -205,6 +207,9 @@ const App = () => {
           </div>
         </section>
       )}
+      <p style={{ fontSize: "10px", marginTop: "50px" }}>
+        made by Johannes Osterkamp
+      </p>
     </main>
   );
 };

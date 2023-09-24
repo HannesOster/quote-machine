@@ -7,3 +7,6 @@
 body {
   transition: ease-in-out background-color 0.7s;
 }
+.quote-card {
+  transition: max-height linear 0.7s;
+}
