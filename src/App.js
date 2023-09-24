@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaTumblr, FaTwitter, FaHeart, FaTrash } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 const App = () => {
   const [quote, setQuote] = useState({ text: "", author: "" });
@@ -59,8 +60,8 @@ const App = () => {
 
   return (
     <main id="quote-box" className="container text-center mt-5">
-      <section className="card p-4 " style={{ backgroundColor: "white" }}>
-        <div id="text" className="mb-4">
+      <section className="quote-card card p-4">
+        <div id="text" className="mb-4 quote-text">
           <h3
             className="lead"
             style={{
@@ -72,7 +73,7 @@ const App = () => {
         </div>
         <div id="author">
           <h5
-            className="font-italic"
+            className="font-italic quote-text"
             style={{
               color: `var(--bs-${activeColor})`,
             }}
@@ -86,7 +87,7 @@ const App = () => {
             href={`https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption=${encodeURIComponent(
               `${quote.author}: ${quote.text}`
             )}`}
-            className="btn btn-success mt-3"
+            className="btn btn-success mt-3  t-button"
             target="_blank"
             rel="noreferrer"
             style={{
@@ -99,7 +100,7 @@ const App = () => {
           </a>{" "}
           <button
             id="new-quote"
-            className="btn btn-primary mt-3 mr-2"
+            className="btn btn-primary mt-3 mr-2  t-button"
             onClick={getNewQuote}
             style={{
               color: "white",
@@ -115,7 +116,7 @@ const App = () => {
               `${quote.text} - ${quote.author}`
             )}`}
             target="_blank"
-            className="btn btn-info mt-3"
+            className="btn btn-info mt-3  t-button"
             rel="noreferrer"
             style={{
               color: "white",
@@ -127,7 +128,7 @@ const App = () => {
           </a>
           <button
             id="save-quote"
-            className="btn btn-warning mt-3"
+            className="btn btn-warning mt-3  t-button"
             onClick={saveQuote}
             style={{
               color: "white",
