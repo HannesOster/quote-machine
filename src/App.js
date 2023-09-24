@@ -47,14 +47,23 @@ const App = () => {
   };
 
   const saveQuote = () => {
-    setSavedQuotes([...savedQuotes, quote]);
+    if (!savedQuotes.some((savedQuote) => savedQuote.text === quote.text)) {
+      setSavedQuotes([...savedQuotes, quote]);
+    }
   };
 
   return (
     <main id="quote-box" className="container text-center mt-5">
       <section className="card p-4 " style={{ backgroundColor: "white" }}>
         <div id="text" className="mb-4">
-          <h3 className="lead">"{quote.text}"</h3>
+          <h3
+            className="lead"
+            style={{
+              color: `var(--bs-${activeColor})`,
+            }}
+          >
+            "{quote.text}"
+          </h3>
         </div>
         <div id="author">
           <h5
