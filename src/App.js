@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { FaTumblr, FaTwitter } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
   const [quote, setQuote] = useState({ text: "", author: "" });
 
-  const colors = ["primary", "dark", "info", "secondary"];
+  const colors = [
+    "primary",
+    "dark",
+    "info",
+    "secondary",
+    "success",
+    "danger",
+    "warning",
+    "purple",
+    "pink",
+    "teal",
+  ];
 
   const fetchRandomQuote = async () => {
     try {
@@ -59,7 +71,7 @@ const App = () => {
             rel="noreferrer"
             style={{ color: "white" }}
           >
-            Post to Tumblr
+            <FaTumblr />
           </a>{" "}
           <button
             id="new-quote"
@@ -79,7 +91,7 @@ const App = () => {
             rel="noreferrer"
             style={{ color: "white" }}
           >
-            Tweet Quote
+            <FaTwitter />
           </a>
         </div>
       </section>
