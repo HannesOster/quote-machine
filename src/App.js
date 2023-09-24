@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaTumblr, FaTwitter, FaHeart } from "react-icons/fa";
+import { FaTumblr, FaTwitter, FaHeart, FaTrash } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
@@ -50,6 +50,11 @@ const App = () => {
     if (!savedQuotes.some((savedQuote) => savedQuote.text === quote.text)) {
       setSavedQuotes([...savedQuotes, quote]);
     }
+  };
+
+  const removeSavedQuote = (index) => {
+    const updatedQuotes = savedQuotes.filter((_, i) => i !== index);
+    setSavedQuotes(updatedQuotes);
   };
 
   return (
@@ -162,9 +167,20 @@ const App = () => {
               >
                 <div className="accordion-body">
                   {savedQuotes.map((savedQuote, index) => (
-                    <div key={index}>
-                      <p>{savedQuote.text}</p>
-                      <p className="font-italic">- {savedQuote.author}</p>
+                    <div
+                      className="d-flex justify-content-between mb-2"
+                      key={index}
+                    >
+                      <div>
+                        <p>{savedQuote.text}</p>
+                        <p className="font-italic">- {savedQuote.author}</p>
+                      </div>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => removeSavedQuote(index)}
+                      >
+                        <FaTrash />
+                      </button>
                     </div>
                   ))}
                 </div>
