@@ -30,6 +30,9 @@ const App = () => {
       const response = await fetch("https://api.quotable.io/random");
       const data = await response.json();
       setQuote({ text: data.content, author: data.author });
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      setActiveColor(randomColor);
+      document.body.style.backgroundColor = `var(--bs-${randomColor})`;
     } catch (error) {
       console.error("Error fetching quote:", error);
     }
@@ -41,25 +44,6 @@ const App = () => {
 
   const getNewQuote = () => {
     fetchRandomQuote();
-
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-
-    document.body.style.backgroundColor = `var(--bs-${randomColor})`;
-    document.getElementById("text").style.color = `var(--bs-${randomColor})`;
-    document.getElementById("author").style.color = `var(--bs-${randomColor})`;
-    document.getElementById(
-      "new-quote"
-    ).style.backgroundColor = `var(--bs-${randomColor})`;
-    document.getElementById(
-      "tweet-quote"
-    ).style.backgroundColor = `var(--bs-${randomColor})`;
-    document.getElementById(
-      "tumblr-quote"
-    ).style.backgroundColor = `var(--bs-${randomColor})`;
-    document.getElementById(
-      "save-quote"
-    ).style.backgroundColor = `var(--bs-${randomColor})`;
-    setActiveColor(randomColor);
   };
 
   const saveQuote = () => {
@@ -73,7 +57,14 @@ const App = () => {
           <h3 className="lead">"{quote.text}"</h3>
         </div>
         <div id="author">
-          <h5 className="font-italic">- {quote.author}</h5>
+          <h5
+            className="font-italic"
+            style={{
+              color: `var(--bs-${activeColor})`,
+            }}
+          >
+            - {quote.author}
+          </h5>
         </div>
         <div className="btn-group btn-group-justified" id="group">
           <a
@@ -84,7 +75,11 @@ const App = () => {
             className="btn btn-success mt-3"
             target="_blank"
             rel="noreferrer"
-            style={{ color: "white", border: "white solid 1px" }}
+            style={{
+              color: "white",
+              border: "white solid 1px",
+              backgroundColor: `var(--bs-${activeColor})`,
+            }}
           >
             <FaTumblr />
           </a>{" "}
@@ -92,17 +87,13 @@ const App = () => {
             id="new-quote"
             className="btn btn-primary mt-3 mr-2"
             onClick={getNewQuote}
-            style={{ color: "white", border: "white solid 1px" }}
+            style={{
+              color: "white",
+              border: "white solid 1px",
+              backgroundColor: `var(--bs-${activeColor})`,
+            }}
           >
             New Quote
-          </button>
-          <button
-            id="save-quote"
-            className="btn btn-danger mt-3"
-            onClick={saveQuote}
-            style={{ color: "white", border: "white solid 1px" }}
-          >
-            <FaHeart />
           </button>
           <a
             id="tweet-quote"
@@ -112,10 +103,26 @@ const App = () => {
             target="_blank"
             className="btn btn-info mt-3"
             rel="noreferrer"
-            style={{ color: "white", border: "white solid 1px" }}
+            style={{
+              color: "white",
+              border: "white solid 1px",
+              backgroundColor: `var(--bs-${activeColor})`,
+            }}
           >
             <FaTwitter />
-          </a>{" "}
+          </a>
+          <button
+            id="save-quote"
+            className="btn btn-warning mt-3"
+            onClick={saveQuote}
+            style={{
+              color: "white",
+              border: "white solid 1px",
+              backgroundColor: `var(--bs-${activeColor})`,
+            }}
+          >
+            <FaHeart />
+          </button>
         </div>
       </section>
       {savedQuotes.length > 0 && (
