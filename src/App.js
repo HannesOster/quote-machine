@@ -76,7 +76,7 @@ const App = () => {
 
   return (
     <main id="quote-box" className="container text-center mt-5">
-      <section className="quote-card card p-4">
+      <section className="quote-card card p-4 container">
         <div id="text" className="mb-4">
           <h3
             className="lead quote-text"
@@ -98,13 +98,13 @@ const App = () => {
           </h5>
         </div>
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-2">
             <a
               id="tumblr-quote"
               href={`https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption=${encodeURIComponent(
                 `${quote.author}: ${quote.text}`
               )}`}
-              className="btn btn-success mt-3 t-button btn-block"
+              className="btn btn-success mt-3 t-button btn-block mx-1"
               target="_blank"
               rel="noreferrer"
               style={{
@@ -116,14 +116,14 @@ const App = () => {
               <FaTumblr />
             </a>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-2">
             <a
               id="tweet-quote"
               href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
                 `${quote.text} - ${quote.author}`
               )}`}
               target="_blank"
-              className="btn btn-info mt-3 t-button btn-block"
+              className="btn btn-info mt-3 t-button btn-block mx-1"
               rel="noreferrer"
               style={{
                 color: "white",
@@ -134,10 +134,10 @@ const App = () => {
               <FaTwitter />
             </a>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-2">
             <button
               id="save-quote"
-              className="btn btn-info mt-3 t-button btn-block"
+              className="btn btn-info mt-3 t-button btn-block mx-1"
               onClick={saveQuote}
               style={{
                 color: "white",
@@ -148,7 +148,7 @@ const App = () => {
               <FaHeart />
             </button>{" "}
           </div>
-          <div className="col-md-3">
+          <div className="col-md-4 offset-md-2">
             <button
               id="new-quote"
               className="btn btn-primary mt-3 t-button btn-block"
@@ -165,7 +165,10 @@ const App = () => {
         </div>
       </section>
       {savedQuotes.length > 0 && (
-        <section className="card p-4 mt-5" style={{ backgroundColor: "white" }}>
+        <section
+          className="card p-4 mt-5 container"
+          style={{ backgroundColor: "white" }}
+        >
           <div className="accordion" id="savedQuotesAccordion">
             <div className="accordion-item">
               <h2 className="accordion-header" id="headingOne">

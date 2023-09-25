@@ -10,3 +10,6 @@ body {
 .quote-card {
   transition: max-height linear 0.7s;
 }
+.container {
+  max-width: 80%;
+}
